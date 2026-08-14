@@ -87,6 +87,7 @@ def wordle_solver():
     with open(dictionary) as f:
         for line in f: 
             word = line.strip()
+            word = word.lower()
             if pattern.search(word):
                 matched_words += [word]
 
@@ -111,9 +112,19 @@ def wordle_solver():
         if all(item in word_array for item in clue_letters):
             possible_words += [word]
 
+    with open(dictionary) as f:
+        the_dictionary = f.readlines()
+
+    dictionary_words = []
+    for line in the_dictionary:
+        dictionary_words += [line.strip()]
+
     print('\n[RUNNING] finding possible words...')
     for possible_word in possible_words:
-        print(f'[*] {possible_word}')
+        for word in dictionary_words:
+            lower_case_dictionary_word = word.lower()
+            if lower_case_dictionary_word == possible_word:
+                print(f'[*] {word}')
 
 if __name__ == '__main__':
     modes = {'wordle solver': wordle_solver, 
