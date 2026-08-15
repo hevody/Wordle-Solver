@@ -153,6 +153,3 @@ if __name__ == '__main__':
 
     chosen_mode = int(input('\n> ')) - 1
     modes[modes_list[chosen_mode]]()
-    
-
-
