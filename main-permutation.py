@@ -116,12 +116,20 @@ def wordle_solver():
     with open(dictionary) as f:
         the_dictionary = f.readlines()
 
+    print('[RUNNING] high potential words...')
+    for based_word in the_dictionary:
+        based_word = based_word.strip()
+        based_word_lower = based_word.lower()
+        for word in possible_words:
+            if based_word_lower == word:
+                print(f'[*] {based_word}')
+
     dictionary_words = []
     for line in the_dictionary:
         dictionary_words += [line.strip()]
 
     filtered_matched_words = []
-    print('\n[RUNNING] finding possible words...')
+    print('\n[RUNNING] finding possible words based on the clue letters...')
     for possible_word in possible_words:
         for word in dictionary_words:
             lower_case_dictionary_word = word.lower()
@@ -136,7 +144,7 @@ def wordle_solver():
 
 if __name__ == '__main__':
     modes = {'wordle solver': wordle_solver, 
-             'jumbled letters solver (best for anagrams)': jumbled_letters_solver}
+             'jumbled letters solver (best for anagrams, wordscapes, 4pics1word)': jumbled_letters_solver}  # this is a little bit slow
     modes_list = list(modes.keys())
 
     print('\nWhich MODE would you like to choose?')   
