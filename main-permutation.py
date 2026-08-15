@@ -31,7 +31,7 @@ def JUMBLE_search_in_dictionary(permutation_list: list, to_exact_length: int):
         english = f.readlines()
 
     word_w_exact_length = []
-    print('\n[RUNNING] dictionary check...')
+    print('[RUNNING] dictionary check...')
     for word_verbatim in english:
         word_verbatim = word_verbatim.strip()
         word = word_verbatim.lower()
@@ -55,6 +55,7 @@ def jumbled_letters_solver():
     print('\nWhat is the length of the word?')
     length = int(input()) - 2                   # we subtracted 2 because of the line `finalPerm = permutations(listPool)`
 
+    print('\n[RUNNING] permutations')
     finalPerm = permutations(listPool)          # this is a list
 
     for _ in range(length):
@@ -119,16 +120,23 @@ def wordle_solver():
     for line in the_dictionary:
         dictionary_words += [line.strip()]
 
+    filtered_matched_words = []
     print('\n[RUNNING] finding possible words...')
     for possible_word in possible_words:
         for word in dictionary_words:
             lower_case_dictionary_word = word.lower()
             if lower_case_dictionary_word == possible_word:
-                print(f'[*] {word}')
+                filtered_matched_words += [word]
+
+    for word in filtered_matched_words:
+        word_array = word.lower()
+        word_array = list(word_array)
+        if all(item in clue_letters for item in word_array):
+            print(f'[*] {word}')
 
 if __name__ == '__main__':
     modes = {'wordle solver': wordle_solver, 
-             'jumbled letters solver': jumbled_letters_solver}
+             'jumbled letters solver (best for anagrams)': jumbled_letters_solver}
     modes_list = list(modes.keys())
 
     print('\nWhich MODE would you like to choose?')   
