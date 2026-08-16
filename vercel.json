@@ -1,0 +1,4 @@
+{
+  "builds": [{"src": "website_port.py", "use": "@vercel/python"}],
+  "routes": [{"src": "/(.*)", "dest": "website_port.py"}]
+}
