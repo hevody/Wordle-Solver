@@ -2,7 +2,7 @@ import wordle_solver_main
 import json
 
 ### opens cli json ###
-with open('cli.json') as f:
+with open('./resources/cli.json') as f:
     cli_display = json.load(fp=f)
 ### --- ###
 

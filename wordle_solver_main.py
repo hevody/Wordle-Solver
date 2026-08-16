@@ -3,7 +3,7 @@ import re
 import json
 
 ### config ###
-with open('config.json') as f:
+with open('./resources/config.json') as f:
     config = json.load(fp=f)
 
 dictionary = config['dictionary']
