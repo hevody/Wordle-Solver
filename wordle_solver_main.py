@@ -26,42 +26,40 @@ def permutations(potential_words_array: list) -> list:                        # 
         listPoolCopy = copy.deepcopy(listPool)
     return permutated_list
 
-def JUMBLE_search_in_dictionary(permutation_list: list, to_exact_length: int):
+def JUMBLE_search_in_dictionary(permutation_list: list, to_exact_length: int) -> tuple[list, list]:
     with open(dictionary) as f:
         english = f.readlines()
 
     word_w_exact_length = []
-    print('[RUNNING] dictionary check...')
+    words_verbatim = []
     for word_verbatim in english:
         word_verbatim = word_verbatim.strip()
         word = word_verbatim.lower()
         word = word.strip()
         if word in permutation_list:
-            print(f'[*] {word_verbatim}')
+            words_verbatim += [word_verbatim]
             if len(word) == to_exact_length + 2:
                 word_w_exact_length += [word_verbatim]
 
-    print('\n[RUNNING] found words with exact length...')
+    exact_word_candidates = []
     for exact_word_candidate in word_w_exact_length:
-        print(f'[*] {exact_word_candidate}')
+        exact_word_candidates += [exact_word_candidate]
 
-def jumbled_letters_solver():
+    return words_verbatim, exact_word_candidates
+
+def jumbled_letters_solver(pool: str, length: int) -> tuple[list, list]:
     global listPool
 
-    print('\nWhat are the jumbled letters?')
-    print('Example: degeo')
-    pool = input('\n> ')
     listPool = list(pool)
-    print('\nWhat is the length of the word?')
-    length = int(input()) - 2                   # we subtracted 2 because of the line `finalPerm = permutations(listPool)`
+    length = length - 2                         # we subtracted 2 because of the line `finalPerm = permutations(listPool)`
 
-    print('\n[RUNNING] permutations')
     finalPerm = permutations(listPool)          # this is a list
 
     for _ in range(length):
         finalPerm += permutations(finalPerm)
 
-    JUMBLE_search_in_dictionary(finalPerm, to_exact_length=length)
+    possible_words_list =JUMBLE_search_in_dictionary(finalPerm, to_exact_length=length)
+    return possible_words_list
 
 def generate_a_regex_pattern(the_known_letters: list):
     generated_pattern = r''

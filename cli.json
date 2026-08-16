@@ -4,9 +4,14 @@
     "\nExample:": {
     "known letters": "?e??e",
     "bad letters": "cranmiht",
-    "clue letters": "og"
+    "clue letters": "og\n"
     }
   },
   "hpw": "\n[RUNNING] high potential words...",
-  "bcl": "\n[RUNNING] finding possible words based on the clue letters..."
+  "bcl": "\n[RUNNING] finding possible words based on the clue letters...",
+  "JUMBLED_question1": "\nWhat are the jumbled letters?\nExample: degeo",
+  "JUMBLED_question2": "\nWhat is the length of the word?",
+  "JUMBLED_running1": "\n[RUNNING] permutations",
+  "JUMBLED_running2": "[RUNNING] dictionary check...",
+  "JUMBLED_running3": "\n[RUNNING] found words with exact length..."
 }
