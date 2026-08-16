@@ -27,4 +27,3 @@ def solution_page():
 
     return render_template('wordle_solved.html', high_potential_words=results[0], words_based_on_cl=results[1])
 
-app.run()
