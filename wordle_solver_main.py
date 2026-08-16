@@ -71,16 +71,11 @@ def generate_a_regex_pattern(the_known_letters: list):
         generated_pattern += letter
     return fr'^{generated_pattern}$'
 
-def wordle_solver():
-    print('''\nExample:
-    known letters: ?e??e        
-    bad letters: cranmiht
-    clue letters: og
-    ''')
+def wordle_solver(known_letters: str, bad_letters: str, clue_letters: str) -> tuple[list, list]:
 
-    known_letters = list(input('known letters: '))       # use regex so finding the words in the dictionary will be easy
-    bad_letters = list(input('bad letters: '))
-    clue_letters = list(input('clue letters: '))                # this will be permutated, change of plans, no 
+    known_letters = list(known_letters.lower())
+    bad_letters = list(bad_letters.lower())
+    clue_letters = list(clue_letters.lower())
 
     pattern = re.compile(fr'{generate_a_regex_pattern(known_letters)}')
 
@@ -91,7 +86,6 @@ def wordle_solver():
             word = word.lower()
             if pattern.search(word):
                 matched_words += [word]
-
     
     list_contains_bad_letters = []
     for letter in bad_letters:
@@ -116,20 +110,22 @@ def wordle_solver():
     with open(dictionary) as f:
         the_dictionary = f.readlines()
 
-    print('[RUNNING] high potential words...')
+    high_potential_words = []
     for based_word in the_dictionary:
         based_word = based_word.strip()
         based_word_lower = based_word.lower()
         for word in possible_words:
             if based_word_lower == word:
-                print(f'[*] {based_word}')
+                high_potential_words += [based_word]        # return this
+
+
 
     dictionary_words = []
     for line in the_dictionary:
         dictionary_words += [line.strip()]
 
     filtered_matched_words = []
-    print('\n[RUNNING] finding possible words based on the clue letters...')
+    words_based_on_clue_letters = []
     for possible_word in possible_words:
         for word in dictionary_words:
             lower_case_dictionary_word = word.lower()
@@ -140,16 +136,6 @@ def wordle_solver():
         word_array = word.lower()
         word_array = list(word_array)
         if all(item in clue_letters for item in word_array):
-            print(f'[*] {word}')
+            words_based_on_clue_letters += [word]
 
-if __name__ == '__main__':
-    modes = {'wordle solver': wordle_solver, 
-             'jumbled letters solver (best for anagrams, wordscapes, 4pics1word)': jumbled_letters_solver}  # this is a little bit slow
-    modes_list = list(modes.keys())
-
-    print('\nWhich MODE would you like to choose?')   
-    for mode in modes:
-        print(f'[{modes_list.index(mode) + 1}] {mode}')
-
-    chosen_mode = int(input('\n> ')) - 1
-    modes[modes_list[chosen_mode]]()
+    return high_potential_words, words_based_on_clue_letters

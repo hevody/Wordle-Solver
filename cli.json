@@ -1,0 +1,12 @@
+{
+  "MODE_MENU": "\nWhich MODE would you like to choose?",
+  "EXAMPLE": {
+    "\nExample:": {
+    "known letters": "?e??e",
+    "bad letters": "cranmiht",
+    "clue letters": "og"
+    }
+  },
+  "hpw": "\n[RUNNING] high potential words...",
+  "bcl": "\n[RUNNING] finding possible words based on the clue letters..."
+}
