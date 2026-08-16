@@ -1,4 +1,4 @@
 {
   "builds": [{"src": "website_port.py", "use": "@vercel/python"}],
-  "routes": [{"src": "/(.*)", "dest": "website_port.py"}]
+  "rewrites": [{"source": "/(.*)", "destination": "website_port.py"}]
 }
