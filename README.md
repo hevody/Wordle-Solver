@@ -13,4 +13,8 @@ The word can either be in English or in Tagalog
 
 # Roadmap
 - port into Discord
-- port into a Website
+- [x] port into a Website
+
+# Acknowledgements
+- I wanna express my gratitude for [Andres Ramos](https://www.vecteezy.com/members/gstudioimagen) of Vecteezy for letting me use his image as an icon for the website
+- Watched this [video](https://www.youtube.com/watch?v=LaMVBDbUtMA) as to how to deploy in Vercel

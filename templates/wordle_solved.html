@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png')}}">
+</head>
   <style>
     input,
     body {
@@ -48,35 +50,32 @@
       font-size: 15px;
     }
   </style>
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png')}}">
+
 </head>
 <body>
   <h1>Wordle Solver...</h1>
-  <p>Welcome, come let's solve today's wordle!</p>
-  <br>
-  <br>
-  <form class="grid-form" action="/" method="POST">
-    <label for="known_letters">known letters: </label>
-    <input type="text", id="known_letters", name="known_letters_input">
+  {% if not high_potential_words and not words_based_on_cl %}
+    <p>Nothing found...</p>
+  {% endif %}
+
+  {% if high_potential_words %}
     <br>
-    <label for="bad_letters">bad letters: </label>
-    <input type="text", id="bad_letters", name="bad_letters_input">
+    <p>High potential words:</p>
+    <ul>
+      {% for high_potential_word in high_potential_words%}
+        <li>{{high_potential_word}}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  
+  {%if words_based_on_cl%}
     <br>
-    <label for="clue_letters">clue letters: </label>
-    <input type="text", id="clue_letters", name="clue_letters_input">
-    <br>
-    <br>
-    <button type="submit">Submit</button>
-    <br><br><br>
-    <p class="body smallfontsize">Still can't decide?</p>
-    <button class="button example" type="button" onclick="exampleFill()">Try out the Example!</button>
-    <script>
-      function exampleFill() {
-        document.getElementById("known_letters").value = "?e??e"
-        document.getElementById("bad_letters").value = "cranmiht"
-        document.getElementById("clue_letters").value = "og"
-      }
-    </script>
-  </form>
+    <p>Potential words based on the clue letters:</p>
+    <ul>
+      {% for word_based_on_cl in words_based_on_cl%}
+        <li>{{word_based_on_cl}}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 </body>
 </html>
